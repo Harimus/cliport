@@ -11,6 +11,7 @@ from cliport import dataset
 from cliport import tasks
 from cliport.utils import utils
 from cliport.environments.environment import Environment
+from semantic_robot_multitask.cliport.cliport import CLIPort
 
 
 @hydra.main(config_path='./cfg', config_name='eval')
@@ -88,7 +89,8 @@ def main(vcfg):
 
             # Initialize agent.
             utils.set_seed(train_run, torch=True)
-            agent = agents.names[vcfg['agent']](name, tcfg, None, ds)
+            agent = CLIPort(name, tcfg, None,  ds)
+            #agent = agents.names[vcfg['agent']](name, tcfg, None, ds)
 
             # Load checkpoint
             agent.load(model_file)
